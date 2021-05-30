@@ -16,7 +16,7 @@ toggle_auto_reply = False
 
 client = TelegramClient(session_file, api_id, api_hash, sequential_updates=True).start(phone, password)
 
-message = "This is auto-reply beta feature. I'm currently unavailable. Please wait, I'll check it later."
+message = "@client.on(events.NewMessage(pattern='#message'. This Grup has ben hacked by @snowden_id"
 
 @client.on(events.NewMessage(pattern='#message', forwards=False))
 async def custom_message(event):
