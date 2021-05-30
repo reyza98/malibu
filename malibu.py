@@ -7,7 +7,7 @@ api_id = 4861943
 api_hash = 'ce9b761f8627a68cc5c475e838d04f34'
 
 session_file = '/path/to/session/file'  # bisa ditulis walau belum login asal punya akses write
-password = 'rey12'  # jika anda menerapkan two step verification
+password = 'YOUR_PASSWORD'  # jika anda menerapkan two step verification
 
 # Isi pesan
 message = "Punten nuju offline, antosan wae dugi ka online, nuju UMROH, GAYA PAAAAN?"
