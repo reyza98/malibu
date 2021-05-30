@@ -12,11 +12,6 @@ password = 'YOUR_PASSWORD'  # jika anda menerapkan two step verification
 # Isi pesan
 message = "Punten nuju offline, antosan wae dugi ka online, nuju UMROH, GAYA PAAAAN?"
 
-if __name__ == '__main__':
-    # Create the client and connect
-    # use sequential_updates=True to respond to messages one at a time
-    client = TelegramClient(session_file, api_id, api_hash, sequential_updates=True)
-
 
     @client.on(events.NewMessage(incoming=True))
     async def handle_new_message(event):
