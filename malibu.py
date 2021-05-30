@@ -2,15 +2,13 @@ import os
 
 from dotenv import load_dotenv
 from telethon import TelegramClient, events
-
+from telethon import TelegramClient, events, utils
 load_dotenv()
 
-api_id = os.getenv("API_ID")
-api_hash = os.getenv("API_HASH")
+api_id = os.getenv("api_id")
+api_hash = os.getenv("api_hash")
 
-phone = os.getenv("TELEGRAM_PHONE_NUMBER")
-session_file = os.getenv("TELEGRAM_USERNAME")
-password = os.getenv("TELEGRAM_PASSWORD")
+client = TelegramClient('badutgalauu', api_id, api_hash)
 
 toggle_auto_reply = False
 
