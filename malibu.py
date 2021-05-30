@@ -1,13 +1,13 @@
-import time
-
 from telethon import TelegramClient, events
+import time
 
 # gunakan api id hash punya anda sendiri, atau cari aja punya orang lain
 api_id = 4861943
 api_hash = 'ce9b761f8627a68cc5c475e838d04f34'
+phone= '+6285862276137'
 
-session_file = '/path/to/session/file'  # bisa ditulis walau belum login asal punya akses write
-password = 'YOUR_PASSWORD'  # jika anda menerapkan two step verification
+
+client = TelegramClient('session', api_id, api_hash)
 
 # Isi pesan
 message = "Punten nuju offline, antosan wae dugi ka online, nuju UMROH, GAYA PAAAAN?"
