@@ -1,46 +1,34 @@
-import os
+import time
 
-from dotenv import load_dotenv
 from telethon import TelegramClient, events
-from telethon import TelegramClient, events, utils
-load_dotenv()
 
-api_id = os.getenv("api_id")
-api_hash = os.getenv("api_hash")
+# gunakan api id hash punya anda sendiri, atau cari aja punya orang lain
+api_id = 4861943
+api_hash = 'ce9b761f8627a68cc5c475e838d04f34'
 
-client = TelegramClient('badutgalauu', api_id, api_hash)
+session_file = '/path/to/session/file'  # bisa ditulis walau belum login asal punya akses write
+password = 'rey12'  # jika anda menerapkan two step verification
 
-toggle_auto_reply = False
+# Isi pesan
+message = "Punten nuju offline, antosan wae dugi ka online, nuju UMROH, GAYA PAAAAN?"
 
-client = TelegramClient(session_file, api_id, api_hash, sequential_updates=True).start(phone, password)
+if __name__ == '__main__':
+    # Create the client and connect
+    # use sequential_updates=True to respond to messages one at a time
+    client = TelegramClient(session_file, api_id, api_hash, sequential_updates=True)
 
-message = "@client.on(events.NewMessage(pattern='#message'. This Grup has ben hacked by @snowden_id"
 
-@client.on(events.NewMessage(pattern='#message', forwards=False))
-async def custom_message(event):
-    if event.to_id.user_id == event.from_id:
-        global message
-        msg = event.message.message.split(" ")
-        message = ' '.join(msg[1:])
-        await event.message.delete()
-        await event.respond("Message set to : "+message)
+    @client.on(events.NewMessage(incoming=True))
+    async def handle_new_message(event):
+        if event.is_private:  # only auto-reply to private chats
+            from_ = await event.client.get_entity(event.from_id)  # this lookup will be cached by telethon
+            if not from_.bot:  # don't auto-reply to bots
+                print(time.asctime(), '-', event.message)  # optionally log time and message
+                time.sleep(1)  # pause for 1 second to rate-limit automatic replies
+                await event.respond(message)
 
-@client.on(events.NewMessage(pattern='#toggle', forwards=False))
-async def toggle_panel(event):
-    if event.to_id.user_id == event.from_id:
-        global toggle_auto_reply
-        if toggle_auto_reply == False:
-            toggle_auto_reply = True
-        else:
-            toggle_auto_reply = False
-            pass
-        await event.message.delete()
-        await event.respond("Toggle set "+str(toggle_auto_reply))
 
-@client.on(events.NewMessage)
-async def auto_reply(event):
-    global toggle_auto_reply
-    if (event.is_private and toggle_auto_reply) and (event.to_id.user_id != event.from_id):
-        await event.reply(message)
-
-client.run_until_disconnected()
+    print(time.asctime(), '-', 'Auto-replying...')
+    client.start()
+    client.run_until_disconnected()
+    print(time.asctime(), '-', 'Stopped!')
